@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card shadow-lg p-4">
+				<h3 class="text-center mb-4">Register</h3>
+				<form method="post" >
+					{% csrf_token %} {% for field in form %}
+					<div class="row mb-1 align-items-center">
+						<label class="col-sm-4 col-form-label font-weight-bold">{{field.label}}</label>
+						<div class="col-sm-5">
+							{{field}} {% if field.errors%}
+						<p class="text-danger position-absolute top-100 start-0 small mt-1 w-100" style="z-index: 10; font-size: large;" >{{field.errors|striptags}}</p>
+						{%endif%}
+						</div>
+					</div>
+					{%endfor%}
+                    <div class="row mt-5">
+					    <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                         </div>
+                    </div>
+				</form>
+				<a href="{% url 'login' %}" class="py-4"> Already have an account?  </a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
