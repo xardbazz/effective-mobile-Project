@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'users',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -120,4 +121,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = 'users.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailBackend',   # Our custom backend
+    'django.contrib.auth.backends.ModelBackend',  # Fallback (optional)
+]
+
+LOGIN_REDIRECT_URL = 'projects'
+LOGOUT_REDIRECT_URL = 'login'
